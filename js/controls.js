@@ -1,8 +1,8 @@
 $(document).ready(function(){
-   var look_interval;
-
     $('body').on('mousedown', '#move-controls a', function(e){
+      $(this).addClass('btn-success');
       var direction = $(this).prop('id').split('-')[1];
+
 
       $.ajax({
         url: "actions/move.php",
@@ -20,6 +20,7 @@ $(document).ready(function(){
     });
 
     $('body').on('mouseup, mouseleave', '#move-controls a', function(e){
+      $(this).removeClass('btn-success');
       $.ajax({
         url: "actions/move.php",
         method: "POST",
@@ -36,14 +37,28 @@ $(document).ready(function(){
     });
 
     $('body').on('mousedown', '#look-controls a', function(e){
-      var object = $(this);
-      clearInterval(look_interval);
-      look_interval = setInterval(function() { look(object) },100);
+      look($(this));
       e.preventDefault();
     });
 
-    $('body').on('mouseup, mouseleave', '#look-controls a', function(e){
-      clearInterval(look_interval);
+    $('body').on('mousedown', '#analog-move', function(evt){
+      var clicked = document.getElementById('analog-move').getBoundingClientRect();
+
+      var x = (180 - ((evt.clientX - clicked.left) / 2)).toFixed(0);
+      var y = ((evt.clientY - clicked.top) / 2).toFixed(0);
+
+      $.ajax({
+        url: "actions/analog-look.php",
+        method: "POST",
+        data: { x: x, y: y },
+        dataType: 'text',
+        mimeType: 'text/plain; charset=x-user-defined'
+      })
+      .done(function(data){
+        $('#analog_cam_x').text(x);
+        $('#analog_cam_y').text(y);
+      });
+
     });
 });
 
@@ -78,6 +93,6 @@ function look(object){
     mimeType: 'text/plain; charset=x-user-defined'
   })
   .done(function(data){
-    console.log('looked');
+
   });
 }
