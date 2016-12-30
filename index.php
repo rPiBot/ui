@@ -17,15 +17,15 @@
       <div id="main" class="row">
         <div id="move-controls" class="col-md-3 text-center full-height">
           <h2>Move</h2>
-          <a id="move-forwards" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-arrow-up"></span>&#8203;</a>
+          <a id="move-forwards" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-arrow-up"></span>&#8203;</a>
           <br/>
           <div class="btn-group">
-            <a id="move-left" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-arrow-left"></span>&#8203;</a>
+            <a id="move-left" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-arrow-left"></span>&#8203;</a>
             <a class="spacer btn disabled"></a>
-            <a id="move-right" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-arrow-right"></span>&#8203;</a>
+            <a id="move-right" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-arrow-right"></span>&#8203;</a>
           </div>
           <br/>
-          <a id="move-backwards" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-arrow-down"></span>&#8203;</a>
+          <a id="move-backwards" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-arrow-down"></span>&#8203;</a>
           <br/>
           <br/>
           <div id="move-status" class="text-uppercase">
