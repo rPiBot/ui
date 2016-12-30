@@ -36,9 +36,9 @@
           <a id="look-up" class="btn btn-info btn-lg" data-axis="y" data-direction="negative"><span class="glyphicon glyphicon-arrow-up"></span>&#8203;</a>
           <br/>
           <div class="btn-group">
-            <a id="look-left" class="btn btn-info btn-lg" data-axis="x" data-direction="negative"><span class="glyphicon glyphicon-arrow-left"></span>&#8203;</a>
+            <a id="look-left" class="btn btn-info btn-lg" data-axis="x" data-direction="positive"><span class="glyphicon glyphicon-arrow-left"></span>&#8203;</a>
             <a id="look-reset" class="btn btn-default btn-lg" data-direction="reset"><span class="glyphicon glyphicon-screenshot"></span>&#8203;</a>
-            <a id="look-right" class="btn btn-info btn-lg" data-axis="x" data-direction="positive"><span class="glyphicon glyphicon-arrow-right"></span>&#8203;</a>
+            <a id="look-right" class="btn btn-info btn-lg" data-axis="x" data-direction="negative"><span class="glyphicon glyphicon-arrow-right"></span>&#8203;</a>
           </div>
           <br/>
           <a id="look-down" class="btn btn-info btn-lg" data-axis="y" data-direction="positive"><span class="glyphicon glyphicon-arrow-down"></span>&#8203;</a>

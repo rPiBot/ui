@@ -38,7 +38,7 @@ $(document).ready(function(){
     $('body').on('mousedown', '#look-controls a', function(e){
       var object = $(this);
       clearInterval(look_interval);
-      look_interval = setInterval(function() { look(object) },200);
+      look_interval = setInterval(function() { look(object) },100);
       e.preventDefault();
     });
 
