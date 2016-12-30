@@ -24,7 +24,7 @@
           <a id="move-backwards" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-arrow-down"></span>&#8203;</a>
         </div>
         <div class="col-md-6">
-          <div id="main-image"></div>
+          <div id="main-image"><img src="http://192.168.1.206/xCam/cam_pic_new.php"></div>
         </div>
         <div id="look-controls" class="col-md-3 text-center">
           <h2>Look</h2>
