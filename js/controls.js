@@ -3,8 +3,6 @@ $(document).ready(function(){
 
     $(document).keydown(function(e) {
       if(pressed != e.which){
-        $('body').append(pressed);
-
         pressed = e.which;
 
         var x = parseInt($('#cam_x').text());
@@ -12,16 +10,16 @@ $(document).ready(function(){
 
         switch(e.which) {
             case 37:  // LEFT
-                look(x + 10, y);
+                look(x + 20, y);
                 break;
             case 39:  // RIGHT
-                look(x - 10, y);
+                look(x - 20, y);
                 break;
             case 38:  // UP
-                look(x, y - 10);
+                look(x, y - 20);
                 break;
             case 40:  // DOWN
-                look(x, y + 10);
+                look(x, y + 20);
                 break;
             case 87:  // W
                 move('forwards');
