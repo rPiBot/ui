@@ -1,98 +1,108 @@
 $(document).ready(function(){
+    $(document).keydown(function(e) {
+        var x = parseInt($('#cam_x').text());
+        var y = parseInt($('#cam_y').text());
+
+        switch(e.which) {
+            case 37:  // LEFT
+                look(x + 10, y);
+                break;
+            case 39:  // RIGHT
+                look(x - 10, y);
+                break;
+            case 38:  // UP
+                look(x, y - 10);
+                break;
+            case 40:  // DOWN
+                look(x, y + 10);
+                break;
+            case 87:  // W
+                move('forwards');
+                break;
+            case 65:  // A
+                move('left');
+                break;
+            case 83:  // S
+                move('backwards');
+                break;
+            case 68:  // D
+                move('right');
+                break;
+            case 82:  // R
+                look(90, 90);
+                break;
+            default:
+                console.log(e.which);
+        }
+    });
+
+    $(document).keyup(function(e) {
+      if(e.which == 87 || e.which == 65 || e.which == 83 || e.which == 68){
+        move('stopped');
+      }
+    });
+
     $('body').on('mousedown', '#move-controls a', function(e){
-      $(this).addClass('btn-success');
       var direction = $(this).prop('id').split('-')[1];
-
-
-      $.ajax({
-        url: "actions/move.php",
-        method: "POST",
-        data: { direction: direction },
-        dataType: 'text',
-        mimeType: 'text/plain; charset=x-user-defined'
-      })
-      .done(function( data ) {
-        $('#move-status').html(direction);
-      });
-
+      move(direction);
       e.preventDefault();
-
     });
 
     $('body').on('mouseup, mouseleave', '#move-controls a', function(e){
-      $(this).removeClass('btn-success');
-      $.ajax({
-        url: "actions/move.php",
-        method: "POST",
-        data: { direction: 'stop' },
-        dataType: 'text',
-        mimeType: 'text/plain; charset=x-user-defined'
-      })
-      .done(function( data ) {
-        $('#move-status').html('STOPPED');
-      });
-
-      e.preventDefault();
-
-    });
-
-    $('body').on('mousedown', '#look-controls a', function(e){
-      look($(this));
+      move('stopped');
       e.preventDefault();
     });
 
-    $('body').on('mousedown', '#analog-move', function(evt){
-      var clicked = document.getElementById('analog-move').getBoundingClientRect();
+    $('body').on('mousedown', '#look', function(evt){
+      var clicked = document.getElementById('look').getBoundingClientRect();
 
-      var x = (180 - ((evt.clientX - clicked.left) / 2)).toFixed(0);
+      var x = (180 - ((evt.clientX - clicked.left)) / 2).toFixed(0);
       var y = ((evt.clientY - clicked.top) / 2).toFixed(0);
 
-      $.ajax({
-        url: "actions/analog-look.php",
-        method: "POST",
-        data: { x: x, y: y },
-        dataType: 'text',
-        mimeType: 'text/plain; charset=x-user-defined'
-      })
-      .done(function(data){
-        $('#analog_cam_x').text(x);
-        $('#analog_cam_y').text(y);
-      });
+      look(x, y);
 
     });
 });
 
-function look(object){
-  var axis = object.data('axis');
-  var direction = object.data('direction');
-  var type = 'step';
-
-  if(object.prop('id') == 'look-reset'){
-    value = 'reset';
-    $('#cam_x').text(90);
-    $('#cam_y').text(90);
-  } else{
-    if(direction == 'positive'){
-      var value = parseInt($('#cam_'+axis).text()) + 10;
-    } else{
-      var value = parseInt($('#cam_'+axis).text()) - 10
-    }
-
-    if(value > 180 || value < 0){
-      return false;
-    }
-    $('#cam_'+axis).text(value);
-  }
-
+function look(x, y){
+  if(x > 180) x = 180;
+  if(y > 180) y = 180;
+  if(x < 0) x = 0;
+  if(y < 0) y = 0;
 
   $.ajax({
     url: "actions/look.php",
     method: "POST",
-    data: { axis: axis, value: value, type: type },
+    data: { x: x, y: y },
     dataType: 'text',
     mimeType: 'text/plain; charset=x-user-defined'
   })
   .done(function(data){
+    $('#cam_x').text(x);
+    $('#cam_y').text(y);
 
+    var c_x = (180 - (x * 2)) + 180;
+    var c_y = y * 2;
+
+    $('#marker').stop().animate({'top':c_y+'px', 'left':c_x+'px'});
+  });
+}
+
+function move(direction){
+  $.ajax({
+    url: "actions/move.php",
+    method: "POST",
+    data: { direction: direction },
+    dataType: 'text',
+    mimeType: 'text/plain; charset=x-user-defined'
+  })
+  .done(function( data ) {
+    $('#move-controls a.btn-success').addClass('btn-info');
+    $('#move-controls a.btn-success').removeClass('btn-success');
+
+    $('#move-'+direction).removeClass('btn-info');
+    $('#move-'+direction).addClass('btn-success');
+
+    $('#move-status').html(direction);
   });
 }

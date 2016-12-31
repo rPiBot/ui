@@ -1,3 +1,5 @@
+<?php exec('python /home/pi/v1/camera.pan_tilt.py 90 90') ?>
+
 <!DOCTYPE>
 <html>
   <head>
@@ -38,36 +40,16 @@
         <div id="look-controls" class="col-md-3 text-center full-height">
           <h2>Look</h2>
 
-          <div id="analog-move-container">
-            <canvas id="analog-move" width="360" height="360"></canvas>
+          <div id="look-container">
+            <div id="marker"></div>
+            <canvas id="look" width="360" height="360"></canvas>
 
-            <div id="analog-move-status" class="text-uppercase">
-                X: <span id="analog_cam_x">90</span>
-              | Y: <span id="analog_cam_y">90</span>
-            </div>
-          </div>
-
-          <div id="digital-move-container" class="hidden">
-            <a id="look-up" class="btn btn-info btn-lg" data-axis="y" data-direction="negative"><span class="glyphicon glyphicon-arrow-up"></span>&#8203;</a>
-            <br/>
-            <div class="btn-group">
-              <a id="look-left" class="btn btn-info btn-lg" data-axis="x" data-direction="positive"><span class="glyphicon glyphicon-arrow-left"></span>&#8203;</a>
-              <a id="look-reset" class="btn btn-default btn-lg" data-direction="reset"><span class="glyphicon glyphicon-screenshot"></span>&#8203;</a>
-              <a id="look-right" class="btn btn-info btn-lg" data-axis="x" data-direction="negative"><span class="glyphicon glyphicon-arrow-right"></span>&#8203;</a>
-            </div>
-            <br/>
-            <a id="look-down" class="btn btn-info btn-lg" data-axis="y" data-direction="positive"><span class="glyphicon glyphicon-arrow-down"></span>&#8203;</a>
-            <br/>
-            <br/>
-            <div id="move-status" class="text-uppercase">
+            <div id="analog-look-status" class="text-uppercase">
                 X: <span id="cam_x">90</span>
               | Y: <span id="cam_y">90</span>
             </div>
           </div>
-
         </div>
-
-
       </div>
     </div>
   </body>
