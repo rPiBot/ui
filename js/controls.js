@@ -1,5 +1,12 @@
 $(document).ready(function(){
+    var pressed = 0;
+
     $(document).keydown(function(e) {
+      if(pressed != e.which){
+        $('body').append(pressed);
+
+        pressed = e.which;
+
         var x = parseInt($('#cam_x').text());
         var y = parseInt($('#cam_y').text());
 
@@ -34,12 +41,14 @@ $(document).ready(function(){
             default:
                 console.log(e.which);
         }
+      }
     });
 
     $(document).keyup(function(e) {
       if(e.which == 87 || e.which == 65 || e.which == 83 || e.which == 68){
         move('stopped');
       }
+      pressed = 0;
     });
 
     $('body').on('mousedown', '#move-controls a', function(e){
